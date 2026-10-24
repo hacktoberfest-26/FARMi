@@ -1,0 +1,27 @@
+# One-click deploy on Render (free plan). The API key is NOT here:
+# Render asks for it during setup and keeps it as a secret.
+services:
+  - type: web
+    name: farmi
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: echo "nessuna dipendenza da installare"
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: LLM_PROVIDER
+        value: google
+      - key: GEMMA_MODEL
+        value: gemma-4-26b-a4b-it
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: RATE_LIMIT_PER_MIN
+        value: "8"
+      - key: RATE_LIMIT_PER_DAY
+        value: "150"
+      - key: DAILY_CAP
+        value: "1200"
